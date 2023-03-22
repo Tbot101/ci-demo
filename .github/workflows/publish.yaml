@@ -9,3 +9,13 @@ jobs:
       - run: |
           npm install
           npm run lint
+  publish:
+    needs: lint
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Publish package
+        - uses: JS-DevTools/npm-publish@v1
+          with:
+            registry: https://npm.pkg.github.com
+            token: ${{ secrets.GITHUB_TOKEN }}
